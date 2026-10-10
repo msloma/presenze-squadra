@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Presenze Squadra</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background-color: #f4f6f8;
+    }
+    iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      display: block;
+    }
+  </style>
+</head>
+<body>
+
+  <iframe id="appFrame" src="" allow="clipboard-write"></iframe>
+
+  <script>
+    // 1. Inserisci l'URL base della tua Web App di Google Apps Script (senza parametri alla fine)
+    const BASE_APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzU73p8ZRS8-EEnxRiC93r63uPHVKxloYHRSk3JCOo99rbUrkIFSiYoPpRlmJW5dGen/exec";
+
+    // 2. Recupera l'eventuale parametro presente nell'URL del browser (es. ?page=admin)
+    const urlParams = new URLSearchParams(window.location.search);
+    const pageParam = urlParams.get('page');
+
+    // 3. Costruisce l'URL di destinazione per l'iframe
+    let targetUrl = BASE_APPS_SCRIPT_URL;
+    if (pageParam) {
+      // Aggiunge o concatena il parametro page
+      const separatore = targetUrl.includes('?') ? '&' : '?';
+      targetUrl += separatore + 'page=' + encodeURIComponent(pageParam);
+    }
+
+    // 4. Carica l'applicazione nell'iframe
+    document.getElementById('appFrame').src = targetUrl;
+  </script>
+
+</body>
+</html>
